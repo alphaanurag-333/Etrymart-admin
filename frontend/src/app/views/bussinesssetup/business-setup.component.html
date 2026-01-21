@@ -1,0 +1,116 @@
+<div class="card" *ngIf="!isLoading; else loadingOrError">
+  <div class="card-header">
+    <h3 class="fs-5">Company Information</h3>
+  </div>
+  <div class="card-body">
+    <form #businessForm="ngForm">
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+      <div *ngIf="success" class="alert alert-success">{{ success }}</div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label class="form-label"><strong>Company Name:</strong></label>
+          <input type="text" class="form-control" name="companyName" [(ngModel)]="business.companyName" required />
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label class="form-label"><strong>Phone:</strong></label>
+          <input type="text" class="form-control" name="phone" [(ngModel)]="business.phone" required />
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label class="form-label"><strong>Company Email:</strong></label>
+          <input type="email" class="form-control" name="companyEmail" [(ngModel)]="business.companyEmail" required />
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label class="form-label"><strong>Company Address:</strong></label>
+          <textarea class="form-control" name="companyAddress" [(ngModel)]="business.companyAddress" rows="2"
+            required></textarea>
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label class="form-label"><strong>Country:</strong></label>
+          <input type="text" class="form-control" name="country" [(ngModel)]="business.country" required />
+        </div>
+
+        <div class="mb-3 col-md-4 d-none">
+          <label class="form-label"><strong>Timezone:</strong></label>
+          <input type="text" class="form-control" name="timezone" [(ngModel)]="business.timezone" />
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label class="form-label"><strong>Delivery Charges:</strong></label>
+          <input type="number" class="form-control" name="deliveryCharges" [(ngModel)]="business.deliveryCharges" />
+        </div>
+        <div class="mb-3 col-md-4 d-none">
+          <label class="form-label"><strong>Razor Pay Key:</strong></label>
+          <input type="text" class="form-control" name="razorPayKey" [(ngModel)]="business.razorPayKey" required />
+        </div>
+        <div class="mb-3 col-md-4">
+          <label for="sellerCommision" class="form-label">
+            <strong>Seller Commission (%):</strong>
+          </label>
+          <input type="number" id="sellerCommision" name="sellerCommision" class="form-control"
+            [(ngModel)]="business.sellerCommision" min="0" />
+        </div>
+        <!-- Logo Upload -->
+        <div class="mb-3 col-md-4">
+          <label for="logoInput" class="form-label"><strong>Company Logo (PNG only):</strong></label>
+          <input type="file" class="form-control" id="logoInput" (change)="onFileSelected($event)" accept="image/png" />
+
+          <div class="mt-2">
+            <!-- Live preview if new file selected -->
+            <img *ngIf="previewLogoUrl; else existingLogo" [src]="previewLogoUrl" alt="New Logo Preview" width="100"
+              class="" style="background: linear-gradient(to bottom, #0C8CE9, #3468A7);" />
+
+            <!-- Fallback to current logo -->
+            <ng-template #existingLogo>
+              <img *ngIf="business.websiteLogo" [src]="getFullLogoUrl()" alt="Current Logo" width="100"
+                class="img-thumbnail" style="background: linear-gradient(to bottom, #0C8CE9, #3468A7);" />
+            </ng-template>
+          </div>
+        </div>
+
+      </div>
+      <div class="mb-3 col-md-12">
+        <label class="form-label d-block"><strong>Payment Methods:</strong></label>
+
+        <div class="form-check form-switch d-inline-block me-4">
+          <input class="form-check-input" type="checkbox" id="codToggle" name="display_cod_payment"
+            [(ngModel)]="business.display_cod_payment" />
+          <label class="form-check-label" for="codToggle">Cash on Delivery</label>
+        </div>
+
+        <div class="form-check form-switch d-inline-block me-4">
+          <input class="form-check-input" type="checkbox" id="onlineToggle" name="display_online_payment"
+            [(ngModel)]="business.display_online_payment" />
+          <label class="form-check-label" for="onlineToggle">Online Payment</label>
+        </div>
+
+        <div class="form-check form-switch d-inline-block">
+          <input class="form-check-input" type="checkbox" id="walletToggle" name="display_wallet_payment"
+            [(ngModel)]="business.display_wallet_payment" />
+          <label class="form-check-label" for="walletToggle">Wallet Payment</label>
+        </div>
+      </div>
+
+
+      <div class="d-flex gap-2 mt-3">
+        <button type="button" class="btn btn-outline-primary primaryout" (click)="onUpdate()" [disabled]="isLoading">
+          Update
+        </button>
+        <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #loadingOrError>
+  <div class="text-center p-4">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Loading company data...</p>
+  </div>
+</ng-template>

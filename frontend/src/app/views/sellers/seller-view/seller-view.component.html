@@ -1,0 +1,81 @@
+<div class="card" *ngIf="!isLoading && seller; else loadingOrError">
+  <div class="card-header">
+    <h3>Seller Details</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 mb-3"><strong>Name:</strong> {{ seller.name }}</div>
+      <div class="col-md-6 mb-3">
+        <strong>Gender:</strong> {{ seller.gender }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>Mobile:</strong> {{ seller.mobile }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>Email:</strong> {{ seller.email }}
+      </div>
+      <!-- <div class="col-md-6 mb-3"><strong>OTP:</strong> {{ seller.otp }}</div> -->
+      <div class="col-md-6 mb-3">
+        <strong>Shop Name:</strong> {{ seller.shop_name }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>Address:</strong> {{ seller.address }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>Country:</strong> {{ seller.country }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>State:</strong> {{ seller.state }}
+      </div>
+      <div class="col-md-6 mb-3"><strong>City:</strong> {{ seller.city }}</div>
+      <div class="col-md-6 mb-3">
+        <strong>Pincode:</strong> {{ seller.pincode }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>Business Category:</strong> {{ seller.business_category }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>GST Number:</strong> {{ seller.gst_number }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>GST Registration Type:</strong>
+        {{ seller.gst_registration_type }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>GST Verified:</strong> {{ seller.gst_verified ? "Yes" : "No" }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <strong>Status:</strong> {{ seller.status }}
+      </div>
+
+      <!-- Profile Image -->
+      <div class="col-md-6 mb-3" *ngIf="seller.profile_image">
+        <p><strong>Profile Image:</strong></p>
+        <span class="profile-img">
+          <img
+            [src]="seller.profile_image"
+            alt="Profile"
+            class="img-thumbnail"
+          />
+        </span>
+      </div>
+
+      <!-- Logo -->
+      <div class="col-md-6 mb-3" *ngIf="seller.logo">
+        <p><strong>Shop Logo:</strong></p>
+        <span class="seller-logo">
+          <img [src]="seller.logo" alt="Logo" class="img-thumbnail" />
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingOrError>
+  <div class="text-center p-4" *ngIf="isLoading">
+    <p>Loading seller data...</p>
+  </div>
+  <div class="text-danger" *ngIf="error">
+    {{ error }}
+  </div>
+</ng-template>

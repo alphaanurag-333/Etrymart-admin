@@ -1,0 +1,129 @@
+<c-row class="g-4 ">
+  <c-col sm="12" md="4">
+    <a [routerLink]="['/seller/products']" style="text-decoration: none">
+      <div class="dashboard-stat border-success d-flex justify-content-between ">
+        <div class="das-side">
+          <div class="dashboard-title">Total Products</div>
+          <div class="dashboard-value">{{ allProductCount ?? '...' }}</div>
+        </div>
+        <div class="dashboard-icon text-success mb-0 d-flex justify-content-between align-items-center">
+          <!-- <i class="cil-cart"></i> -->
+          <img src="assets/seller-icons/cart.png" width="35" class="m-0" alt="" srcset="">
+        </div>
+      </div>
+    </a>
+  </c-col>
+
+  <c-col sm="12" md="4">
+    <a [routerLink]="['/seller']" style="text-decoration: none">
+      <div class="dashboard-stat border-primary d-flex justify-content-between ">
+        <div class="das-side">
+          <div class="dashboard-title">Total Earnings</div>
+          <div class="dashboard-value">₹{{ totalEarnings!=null ? totalEarnings.toFixed(2) : '...' }}</div>
+        </div>
+        <div class="dashboard-icon text-primary mb-0  d-flex justify-content-between align-items-center">
+          <img src="assets/seller-icons/wallet.png" width="35" class="m-0" alt="" srcset="">
+          <!-- <i class="cil-wallet"></i> -->
+        </div>
+      </div>
+    </a>
+  </c-col>
+  
+  <c-col sm="12" md="4">
+    <a [routerLink]="['/seller/orders']" style="text-decoration: none">
+      <div class="dashboard-stat border-info d-flex justify-content-between">
+        <div class="das-side">
+          <div class="dashboard-title">Total Orders</div>
+          <div class="dashboard-value">{{ allOrderCount ?? '...' }}</div>
+        </div>
+        <div class="dashboard-icon text-info mb-0  d-flex justify-content-between align-items-center">
+          <img src="assets/seller-icons/order.png" width="35" class="m-0" alt="" srcset="">
+          <!-- <i class="cil-list"></i> -->
+        </div>
+      </div>
+    </a>
+  </c-col>
+</c-row>
+
+
+<c-row class="g-3 mt-3">
+    <c-col sm="6" md="3">
+    <div class="status-card border border-primary" (click)="onStatusClick('all')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-task text-primary fs-5"></i>
+        <span class="status-title">All</span>
+      </div>
+      <span class="status-count text-primary">{{ allOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+  <c-col sm="6" md="3">
+    <div class="status-card border border-primary" (click)="onStatusClick('Pending')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-task text-primary fs-5"></i>
+        <span class="status-title">Pending</span>
+      </div>
+      <span class="status-count text-primary">{{ pendingOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+
+  <c-col sm="6" md="3">
+    <div class="status-card border border-success" (click)="onStatusClick('Confirmed')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-check-circle text-success fs-5"></i>
+        <span class="status-title">Confirmed</span>
+      </div>
+      <span class="status-count text-success">{{ confirmedOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+
+  <c-col sm="6" md="3">
+    <div class="status-card border border-info" (click)="onStatusClick('Shipped')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-cloud-download text-info fs-5"></i>
+        <span class="status-title">Shipped</span>
+      </div>
+      <span class="status-count text-info">{{ shippedOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+
+
+
+  <c-col sm="6" md="3">
+    <div class="status-card border border-primary" (click)="onStatusClick('Delivered')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-envelope-open text-primary fs-5"></i>
+        <span class="status-title">Delivered</span>
+      </div>
+      <span class="status-count text-primary">{{ deliveredOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+
+  <c-col sm="6" md="3">
+    <div class="status-card border border-danger" (click)="onStatusClick('Cancelled')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-ban text-danger fs-5"></i>
+        <span class="status-title">Cancelled</span>
+      </div>
+      <span class="status-count text-danger">{{ cancelledOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+
+  <c-col sm="6" md="3">
+    <div class="status-card border border-dark" (click)="onStatusClick('Returned')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-loop-circular text-dark fs-5"></i>
+        <span class="status-title">Returned</span>
+      </div>
+      <span class="status-count text-dark">{{ returnOrderCount ?? '...' }}</span>
+    </div>
+  </c-col>
+  <c-col sm="6" md="3">
+    <div class="status-card border border-warning" (click)="onStatusClick('OutForDelivery')">
+      <div class="d-flex align-items-center gap-2">
+        <i class="cil-truck text-warning fs-5"></i>
+        <span class="status-title">Out for Delivery</span>
+      </div>
+      <span class="status-count text-warning">{{ outOfDeliveryCount ?? '...' }}</span>
+    </div>
+  </c-col>
+</c-row>
